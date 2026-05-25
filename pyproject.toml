@@ -1,7 +1,18 @@
 [project]
-name = "Top-Bank"
+name = "top-bank"
 version = "0.1.0"
-description = "Add your description here"
+description = "Um simples projeto para prática de GitLab Flow"
+author = [
+    { name = "João Marcos Silva Fernandes de Freitas" , email = "jomasii2@gmail.com" }
+]
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "pandas>=3.0.2",
+    "pydantic>=2.13.3",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]

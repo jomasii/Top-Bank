@@ -1,4 +1,4 @@
-from persistence.account_repository import AccountRepository
+from persistence.account_repo import AccountRepository
 
 class BankService:
     def __init__(self, repository: AccountRepository):

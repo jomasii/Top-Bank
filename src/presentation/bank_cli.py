@@ -62,8 +62,7 @@ def run_registration(service):
     Call registration service
     """
     acc_id = _prompt_account_number()
-    account_type = _prompt_account_type()
-    success, balance = service.register_account(acc_id, account_type)
+    balance, success = service.register_account(acc_id)
     if success:
         account_label = ACCOUNT_TYPE_LABELS[account_type]
         print(f"{account_label} {acc_id} criada com sucesso. Saldo: R$ {balance:.2f}")
@@ -92,18 +91,14 @@ def run_deposit(service: BankService):
     """
     acc_id = _prompt_account_number()
     amount = _prompt_amount_number()
-    
-    if amount <= 0:
-        print("O valor do depósito deve ser maior que zero.")
-        return
 
-    balance, earned_points, success = service.make_deposit(acc_id, amount)
-    if success:
+    balance, msg = service.make_deposit(acc_id, amount)
+    if balance is not None:
         print(f"Depósito realizado! Novo saldo da conta {acc_id}: R$ {balance:.2f}")
         if earned_points > 0:
             print(f"Pontos bônus dessa operação: {earned_points} ponto(s)")
     else:
-        print(f"Erro: Conta {acc_id} não encontrada.")
+        print(msg)
 
 def run_withdrawal(service: BankService):
     """
@@ -111,36 +106,26 @@ def run_withdrawal(service: BankService):
     """
     acc_id = _prompt_account_number()
     amount = _prompt_amount_number()
-    
-    if amount <= 0:
-        print("O valor do saque deve ser maior que zero.")
-        return
 
-    balance, success = service.make_withdrawal(acc_id, amount)
-    if success:
+    balance, msg = service.make_withdrawal(acc_id, amount)
+    if balance is not None:
         print(f"Saque realizado! Novo saldo da conta {acc_id}: R$ {balance:.2f}")
     else:
-        print(f"Erro: Conta {acc_id} não encontrada.")
+        print(msg)
 
 def run_transfer(service: BankService):
     """
     Call transfer service
     """
-    print("Conta de origem:")
+    print("Origem")
     origin_id = _prompt_account_number()
-    print("Conta de destino:")
+    print("Destino")
     destination_id = _prompt_account_number()
     amount = _prompt_amount_number()
 
-    if amount <= 0:
-        print("O valor da transferência deve ser maior que zero.")
-        return
-
-    origin_balance, destination_balance, earned_points, success = service.make_transfer(
-        origin_id, destination_id, amount
-    )
-    if success:
-        print(f"Transferência realizada!")
+    origin_balance, destination_balance, msg = service.make_transfer(origin_id, destination_id, amount)
+    if origin_balance is not None and destination_balance is not None:
+        print("Transferência realizada!")
         print(f"Novo saldo da conta {origin_id}: R$ {origin_balance:.2f}")
         print(f"Novo saldo da conta {destination_id}: R$ {destination_balance:.2f}")
         if earned_points > 0:
@@ -148,7 +133,7 @@ def run_transfer(service: BankService):
                 f"Pontos bônus da conta {destination_id} nessa operação: {earned_points} ponto(s)"
             )
     else:
-        print("Erro: verifique se as contas existem e o valor é válido.")
+        print(msg)
 
 def run_render_interest(service: BankService):
     """

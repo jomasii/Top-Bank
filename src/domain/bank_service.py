@@ -1,4 +1,4 @@
-from persistence.account_repository import AccountRepository
+from persistence.account_repo import AccountRepository
 
 class BankService:
     def __init__(self, repository: AccountRepository):
@@ -31,6 +31,17 @@ class BankService:
         if amount <= 0:
             return -float("inf"), False
         sucess = self.repository.deposit(account_id, amount)
+        if sucess:
+            return self.repository.get_balance(account_id), sucess
+        return -float("inf"), sucess
+    
+    def make_withdrawal(self, account_id: int, amount: float) -> tuple[float, bool]:
+        """
+        Make the withdrawal and refund the amount.
+        """
+        if amount <= 0:
+            return -float("inf"), False
+        sucess = self.repository.withdrawal(account_id, amount)
         if sucess:
             return self.repository.get_balance(account_id), sucess
         return -float("inf"), sucess

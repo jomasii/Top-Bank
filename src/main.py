@@ -1,7 +1,7 @@
 from persistence.account_repo import AccountRepository
 from domain.bank_service import BankService
 from presentation.bank_cli import (
-    BankCLI, 
+    BankCLI,
     run_registration,
     run_render_interest,
     run_deposit,

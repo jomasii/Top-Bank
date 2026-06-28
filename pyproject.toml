@@ -1,6 +1,6 @@
 [project]
 name = "top-bank"
-version = "1.0.0"
+version = "0.1.0"
 description = "Um simples projeto para prática de GitLab Flow"
 author = [
     { name = "João Marcos Silva Fernandes de Freitas" , email = "jomasii2@gmail.com" }

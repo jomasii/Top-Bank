@@ -147,7 +147,7 @@ class BankService:
         Applies interest to every savings account.
         """
         if interest_rate < 0:
-            return 0, "Taxa inválida"
+            return 0, "Taxa de juros inválida"
 
         updated_accounts = self.repository.apply_interest_to_savings_accounts(
             interest_rate

@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     env:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_IMAGE: ${{ secrets.DOCKER_USERNAME }}/top-bank
+      DOCKER_IMAGE: ${{ secrets.DOCKER_USERNAME }}/op-bank
     steps:
     - name: Checkout code
       uses: actions/checkout@v4

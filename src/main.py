@@ -8,3 +8,11 @@ app = FastAPI(
 )
 
 app.include_router(balance)
+
+@app.get("/health", tags=["System"])
+def health_check() -> dict[str, str]:
+    """
+    Endpoint de verificação de saúde da API.
+    Utilizado por ferramentas de orquestração e monitoramento.
+    """
+    return {"status": "ok"}

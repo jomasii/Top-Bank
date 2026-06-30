@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     env:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_IMAGE: ${{ secrets.DOCKER_USERNAME }}/op-bank
+      DOCKER_IMAGE: ${{ secrets.DOCKER_USERNAME }}/topbank
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -54,7 +54,7 @@ jobs:
     - name: Build Docker Image
       run: |
         echo "Building image with version tag: ${{ steps.get_version.outputs.version }}"
-        docker build -t ${{ env.DOCKER_IMAGE }}:${{ steps.get_version.outputs.version }} .
+        docker build -f .devcontainer/Dockerfile -t ${{ env.DOCKER_IMAGE }}:${{ steps.get_version.outputs.version }} .
         docker tag ${{ env.DOCKER_IMAGE }}:${{ steps.get_version.outputs.version }} ${{ env.DOCKER_IMAGE }}:latest
 
     - name: Push Docker Image to Docker Hub

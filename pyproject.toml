@@ -1,6 +1,6 @@
 [project]
 name = "top-bank"
-version = "1.0.0"
+version = "0.1.0"
 description = "Um simples projeto para prática de GitLab Flow"
 author = [
     { name = "João Marcos Silva Fernandes de Freitas" , email = "jomasii2@gmail.com" }
@@ -17,6 +17,8 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "mypy>=2.1.0",
+    "pandas-stubs>=3.0.3.260530",
     "pytest>=9.0.3",
     "ruff>=0.15.17",
 ]
@@ -41,3 +43,7 @@ ignore = [
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+
+[tool.mypy]
+explicit_package_bases = true
+mypy_path = "."

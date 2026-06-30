@@ -1,7 +1,8 @@
 {
   "name": "Top-Bank Python (uv)",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "Dockerfile",
+    "context": ".."
   },
   "remoteUser": "vscode",
   "customizations": {
